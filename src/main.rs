@@ -1,13 +1,10 @@
-#![feature(proc_macro_hygiene, decl_macro)]
-
 #[macro_use] extern crate rocket;
 
-pub mod routes;
+mod routes;
 
-use crate::routes::user::{create_user};
+use crate::routes::user::*;
 
-fn main() {
-    rocket::ignite()
-        .mount("/users", routes![create_user])
-        .launch();
+#[launch]
+fn rocket() -> _ {
+    rocket::build().mount("/users", routes![create_user])
 }
